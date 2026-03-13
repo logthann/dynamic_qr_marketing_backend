@@ -8,3 +8,4 @@ mysql-connector-python
 passlib[bcrypt]
 pyjwt
 python-multipart
+qrcode[pil]
