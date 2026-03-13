@@ -1,9 +1,16 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from ..core.config import get_settings
+from sqlalchemy.orm import declarative_base, sessionmaker
 
-settings = get_settings()
-connect_args = {"check_same_thread": False} if settings.DATABASE_URL.startswith("sqlite") else {}
-engine = create_engine(settings.DATABASE_URL, connect_args=connect_args)
+SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://root:123456@localhost:3306/dynamic_qr_marketing"
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+Base = declarative_base()
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

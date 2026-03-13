@@ -3,4 +3,8 @@ uvicorn[standard]
 sqlalchemy
 pydantic
 python-dotenv
-
+pydantic-settings
+mysql-connector-python
+passlib[bcrypt]
+pyjwt
+python-multipart
