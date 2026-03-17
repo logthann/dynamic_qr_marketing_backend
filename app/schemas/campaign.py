@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 from datetime import date
 
@@ -9,10 +9,19 @@ class CampaignCreate(BaseModel):
     end_date: Optional[date] = None
     ga_measurement_id: Optional[str] = None
 
+
+class CampaignUpdate(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+    start_date: Optional[date] = None
+    end_date: Optional[date] = None
+    ga_measurement_id: Optional[str] = None
+    status: Optional[str] = None
+
+
 class CampaignResponse(CampaignCreate):
     id: int
     user_id: int
     status: str
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

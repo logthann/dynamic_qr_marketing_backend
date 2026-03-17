@@ -6,7 +6,17 @@ class QRCodeCreate(BaseModel):
     campaign_id: Optional[int] = None
     destination_url: str
     qr_type: Optional[str] = "url"
-    design_config: Optional[Dict[str, Any]] = None # Chứa JSON cấu hình màu sắc, logo
+    design_config: Optional[Dict[str, Any]] = None
+
+
+class QRCodeUpdate(BaseModel):
+    name: Optional[str] = None
+    campaign_id: Optional[int] = None
+    destination_url: Optional[str] = None
+    qr_type: Optional[str] = None
+    design_config: Optional[Dict[str, Any]] = None
+    status: Optional[str] = None
+
 
 class QRCodeResponse(QRCodeCreate):
     id: int
