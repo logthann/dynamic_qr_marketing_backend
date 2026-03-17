@@ -1,0 +1,53 @@
+### Base URL
+@baseUrl = http://127.0.0.1:8000
+@username = log@gmail.com
+@password = 111
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsb2dAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJleHAiOjE3NzM3NDAzNjd9.51eSYmUF88V4NzjaXeJbZQymiZpnbsDVtIjV1LKIK_I
+
+### Health check (optional)
+GET {{baseUrl}}/
+
+### 1) Login - JSON body (use this if /auth/login expects JSON)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "password": "{{password}}"
+}
+
+### 1b) Login - Form body (use this if /auth/login expects OAuth2 form)
+POST {{baseUrl}}/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username={{username}}&password={{password}}
+
+### 2) Create campaign
+POST {{baseUrl}}/campaigns/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Test campaign from PyCharm",
+  "description": "demo"
+}
+
+### 3) Get my campaigns
+GET {{baseUrl}}/campaigns/
+Authorization: Bearer {{token}}
+
+### 4) Create QR code
+POST {{baseUrl}}/qrcodes/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "QR test from PyCharm",
+  "campaign_id": 1,
+  "destination_url": "https://example.com",
+  "qr_type": "url",
+  "design_config": {
+    "color": "#000000",
+    "logo": ""
+  }
+}

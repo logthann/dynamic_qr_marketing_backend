@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional, Dict, Any
 
 class QRCodeCreate(BaseModel):
@@ -14,5 +14,4 @@ class QRCodeResponse(QRCodeCreate):
     short_code: str
     status: str
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
