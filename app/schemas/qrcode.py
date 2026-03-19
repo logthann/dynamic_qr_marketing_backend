@@ -7,6 +7,10 @@ class QRCodeCreate(BaseModel):
     destination_url: str
     qr_type: Optional[str] = "url"
     design_config: Optional[Dict[str, Any]] = None
+    ga_measurement_id: Optional[str] = None
+    utm_source: Optional[str] = None
+    utm_medium: Optional[str] = None
+    utm_campaign: Optional[str] = None
 
 
 class QRCodeUpdate(BaseModel):
@@ -15,6 +19,10 @@ class QRCodeUpdate(BaseModel):
     destination_url: Optional[str] = None
     qr_type: Optional[str] = None
     design_config: Optional[Dict[str, Any]] = None
+    ga_measurement_id: Optional[str] = None
+    utm_source: Optional[str] = None
+    utm_medium: Optional[str] = None
+    utm_campaign: Optional[str] = None
     status: Optional[str] = None
 
 

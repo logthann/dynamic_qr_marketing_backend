@@ -2,7 +2,7 @@
 @baseUrl = http://127.0.0.1:8000
 @username = log@gmail.com
 @password = 111
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsb2dAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJleHAiOjE3NzM3NDE0MzZ9.ah5xxyf_aMC-sQdBpu1Yz9Us964MIWCPVR1vLcYkaAE
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsb2dAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJleHAiOjE3NzM3NjEwODh9.31vFgKh7v0o5uyCnm0lp9OoAibH5cK4cCKiF6Tf7kts
 
 ### Health check (optional)
 GET {{baseUrl}}/
@@ -63,7 +63,11 @@ Content-Type: application/json
   "design_config": {
     "color": "#000000",
     "logo": ""
-  }
+  },
+  "ga_measurement_id": "G-ABC123XYZ",
+  "utm_source": "facebook",
+  "utm_medium": "cpc",
+  "utm_campaign": "summer_sale_2026"
 }
 
 ### 4b) Update QR code
@@ -74,11 +78,15 @@ Content-Type: application/json
 {
   "name": "QR updated from PyCharm",
   "destination_url": "https://github.com",
+  "ga_measurement_id": "G-NEW456DEF",
+  "utm_source": "google",
+  "utm_medium": "organic",
+  "utm_campaign": "brand_search",
   "status": "active"
 }
 
 ### 4c) Delete QR code
-DELETE {{baseUrl}}/qrcodes/1
+DELETE {{baseUrl}}/qrcodes/4
 Authorization: Bearer {{token}}
 
 ### 4d) Get QR codes by campaign id

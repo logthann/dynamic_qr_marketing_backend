@@ -1,10 +1,12 @@
-﻿from typing import Optional
+from typing import Optional
 import datetime
 
 from sqlalchemy import BigInteger, CheckConstraint, Date, ForeignKeyConstraint, Index, Integer, JSON, String, TIMESTAMP, Text, text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
-from app.db.session import Base
+class Base(DeclarativeBase):
+    pass
+
 
 class Users(Base):
     __tablename__ = 'users'
@@ -42,7 +44,6 @@ class Campaigns(Base):
     description: Mapped[Optional[str]] = mapped_column(Text)
     start_date: Mapped[Optional[datetime.date]] = mapped_column(Date)
     end_date: Mapped[Optional[datetime.date]] = mapped_column(Date)
-    ga_measurement_id: Mapped[Optional[str]] = mapped_column(String(100))
     status: Mapped[Optional[str]] = mapped_column(String(50), server_default=text("'active'"))
     created_at: Mapped[Optional[datetime.datetime]] = mapped_column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
     updated_at: Mapped[Optional[datetime.datetime]] = mapped_column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
@@ -90,12 +91,16 @@ class Qrcodes(Base):
     short_code: Mapped[str] = mapped_column(String(50), nullable=False)
     destination_url: Mapped[str] = mapped_column(Text, nullable=False)
     campaign_id: Mapped[Optional[int]] = mapped_column(Integer)
+    ga_measurement_id: Mapped[Optional[str]] = mapped_column(String(100))
     qr_type: Mapped[Optional[str]] = mapped_column(String(50))
     design_config: Mapped[Optional[dict]] = mapped_column(JSON)
     status: Mapped[Optional[str]] = mapped_column(String(50), server_default=text("'active'"))
     created_at: Mapped[Optional[datetime.datetime]] = mapped_column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
     updated_at: Mapped[Optional[datetime.datetime]] = mapped_column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
     deleted_at: Mapped[Optional[datetime.datetime]] = mapped_column(TIMESTAMP)
+    utm_source: Mapped[Optional[str]] = mapped_column(String(100))
+    utm_medium: Mapped[Optional[str]] = mapped_column(String(100))
+    utm_campaign: Mapped[Optional[str]] = mapped_column(String(100))
 
     campaign: Mapped[Optional['Campaigns']] = relationship('Campaigns', back_populates='qrcodes')
     user: Mapped['Users'] = relationship('Users', back_populates='qrcodes')

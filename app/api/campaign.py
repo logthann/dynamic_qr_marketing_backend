@@ -48,7 +48,7 @@ def update_campaign(
     if not campaign:
         raise HTTPException(status_code=404, detail="Campaign not found")
 
-    update_data = campaign_in.model_dump(exclude_unset=True)
+    update_data = campaign_in.model_dump(exclude_unset=True, exclude_none=True)
     for field, value in update_data.items():
         setattr(campaign, field, value)
 

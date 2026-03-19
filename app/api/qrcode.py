@@ -48,7 +48,7 @@ def update_qrcode(
     if not qrcode:
         raise HTTPException(status_code=404, detail="QRCode not found")
 
-    update_data = qr_in.model_dump(exclude_unset=True)
+    update_data = qr_in.model_dump(exclude_unset=True, exclude_none=True)
     for field, value in update_data.items():
         setattr(qrcode, field, value)
 

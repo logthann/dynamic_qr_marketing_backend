@@ -7,7 +7,6 @@ class CampaignCreate(BaseModel):
     description: Optional[str] = None
     start_date: Optional[date] = None
     end_date: Optional[date] = None
-    ga_measurement_id: Optional[str] = None
 
 
 class CampaignUpdate(BaseModel):
@@ -15,7 +14,6 @@ class CampaignUpdate(BaseModel):
     description: Optional[str] = None
     start_date: Optional[date] = None
     end_date: Optional[date] = None
-    ga_measurement_id: Optional[str] = None
     status: Optional[str] = None
 
 
